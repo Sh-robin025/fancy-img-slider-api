@@ -70,13 +70,21 @@ searchBtn.addEventListener('click', function() {
     // sliders.length = 0;
 })
 
-// enter key addEventListener:-
+// enter key addEventListener :-
 document.getElementById("search")
     .addEventListener("keypress", function(event) {
         if (event.key === 'Enter') {
             searchBtn.click();
         }
     });
+document.getElementById("duration")
+    .addEventListener("keypress", function(event) {
+        if (event.key === 'Enter') {
+            sliderBtn.click();
+        }
+    })
+
+
 
 // for slider select item from here:-
 const selectItem = (event, img) => {
@@ -85,15 +93,12 @@ const selectItem = (event, img) => {
     const sliderCount = document.getElementById("count");
 
     let item = sliders.indexOf(img);
-    console.log(item);
     if (item === -1) {
         sliders.push(img);
         sliderCount.innerText = sliders.length;
-        console.log("add");
     } else {
         sliders.pop(img);
         sliderCount.innerText = sliders.length;
-        console.log("remove");
     }
 }
 
