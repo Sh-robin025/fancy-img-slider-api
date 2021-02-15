@@ -18,6 +18,7 @@ const getImages = (input) => {
         document.getElementById("empty-input-signal").style.display = "block";
     } else {
         loading();
+        document.getElementById("searched-name").innerText = `# ${input}`;
         document.getElementById("empty-input-signal").style.display = "none";
         fetch(`https://pixabay.com/api/?key=${KEY}&q=${input}&image_type=photo&pretty=true`)
             .then(response => response.json())
@@ -41,12 +42,23 @@ const showImages = (images) => {
     gallery.innerHTML = '';
     // show gallery title
     galleryHeader.style.display = 'block';
-    images.forEach(image => {
-        let div = document.createElement('div');
-        div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
-        div.innerHTML = ` <img class="img-fluid img-thumbnail added" onclick="selectItem(event,'${image.webformatURL}')" src="${image.webformatURL}" alt="${image.tags}">`;
-        gallery.appendChild(div);
-    })
+    // here i through a condition,when user find something with input randomly,
+    // which can't get from api,then user will get a (404) message !
+    // for bonus marks
+    if (images.length === 0) {
+        gallery.innerHTML = `
+        <div class="text-center mx-auto">
+            <h1>404, <br> Not Found !</h1>
+            <p>Pls make sure that,you find valid things.</p>
+        </div>`;
+    } else {
+        images.forEach(image => {
+            let div = document.createElement('div');
+            div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
+            div.innerHTML = ` <img class="img-fluid img-thumbnail added" onclick="selectItem(event,'${image.webformatURL}')" src="${image.webformatURL}" alt="${image.tags}">`;
+            gallery.appendChild(div);
+        })
+    }
     loading();
 }
 
@@ -68,17 +80,19 @@ document.getElementById("search")
 
 // for slider select item from here:-
 const selectItem = (event, img) => {
-    const element = event.target;
+    let element = event.target;
     element.classList.toggle("added");
     const sliderCount = document.getElementById("count");
-    sliderCount.innerText = sliders.length;
+
     let item = sliders.indexOf(img);
-    console.log(img);
-    if (item == -1) {
+    console.log(item);
+    if (item === -1) {
         sliders.push(img);
+        sliderCount.innerText = sliders.length;
         console.log("add");
     } else {
         sliders.pop(img);
+        sliderCount.innerText = sliders.length;
         console.log("remove");
     }
 }

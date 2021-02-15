@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(56, 51, 50);
+    background-color: rgb(250, 249, 249);
 }
 
 .title {
@@ -24,19 +24,28 @@ body {
     margin: 10px auto;
 }
 
+h4 i {
+    color: black;
+    font-size: 60px;
+}
+
 h6 {
     color: red;
     display: none;
     text-align: center;
-    margin-left: 45%;
+    margin-left: 37%;
+    position: relative;
+    bottom: 28px;
 }
 
 h3 {
-    color: chartreuse;
+    color: #28a745;
 }
 
-h5 {
-    color: rgb(204, 224, 17);
+#searched-name {
+    text-align: left;
+    position: relative;
+    right: 170px;
 }
 
 .slider-item {
