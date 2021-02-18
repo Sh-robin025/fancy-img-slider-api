@@ -97,7 +97,7 @@ const selectItem = (event, img) => {
         sliders.push(img);
         sliderCount.innerText = sliders.length;
     } else {
-        sliders.pop(img);
+        sliders.splice(item, 1);
         sliderCount.innerText = sliders.length;
     }
 }
